@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"/>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"rel="stylesheet">
+	  <link href="https://fonts.googleapis.com/css2? family=Pacifico&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="shortcut icon" href="images/climateView.png" type="image/x-icon">
+    <title>ClimateView</title>
+  </head>
+  <body>
+
+    <div class="content-outside">
+      
+      <div class="content-initial">
+
+        <div class="logo-img">
+          <img src="images/download.png" alt="">
+        </div>
+
+        <div class="date">
+          <p id="current-time"></p>
+          <p id="current-date"></p>
+        </div><!--date-->
+
+        <div class="city">
+          <h1 id="name_city_info"></h1>
+          <h2 id="name_country_info"></h2>
+        </div><!--city-->
+
+
+        <div class="search-container">
+          <div class="search">
+            <p>Digite o nome de uma cidade para ver seu clima atual  <i class="fas fa-arrow-right"></i></p>
+
+            <div>
+              
+              <input type="text" id="name_city" />
+            </div>
+            <button id="request" type="submit">Buscar</button>
+          </div>
+        </div><!--search-containe-->
+
+      </div><!---content-initial-->
+
+      <div class="content">
+
+        <div id="icon-time"></div>
+
+        <div class="description">
+          <h1 id="description-time"></h1>
+        </div><!--description-->
+
+        <div class="temperature">
+          <h1 id="current-temperature"></h1>
+
+          <p class="change_unit">
+            <span id="btn-celsius">C</span> | <span id="btn-kelvin">K</span>
+          </p>
+
+          <h2>
+            <i class="fas fa-arrow-down"></i>
+            <span id="min-temperature"></span> 
+            <span id="max-temperature"></span> <i class="fas fa-arrow-up"></i>
+          </h2>
+        </div><!--temperature-->
+
+        <div class="divider"></div>
+
+        <div class="other-info">
+          <div class="info-item">
+            <span class="icon">
+              <span class="material-symbols-outlined">cloud</span>
+              <i class="fas fa-arrow-right"></i>
+            </span>
+
+            <span id="wind-speed"></span>
+          </div><!--info-item-->
+
+          <div class="info-item">
+            <span class="icon">
+              <span class="material-symbols-outlined">sunny</span>
+              <i class="fas fa-arrow-up"></i>
+            </span>
+
+            <span id="sunrise-time"></span>
+          </div><!--info-item-->
+
+          <div class="info-item">
+            <span class="icon">
+              <span class="material-symbols-outlined">partly_cloudy_day</span>
+              <i class="fas fa-arrow-down"></i>
+            </span>
+            <span id="sunset-time"></span>
+          </div> <!--info-item-->
+        </div><!--other-info-->
+      </div><!--content-->
+
+      <div class="menu-bar">
+        <span class="content-initial-active"></span>
+        <span class="content-active"></span>
+      </div><!--menu-bar-->
+
+      <span class="material-symbols-outlined next-page">chevron_right</span>
+      <span class="material-symbols-outlined previous-page">chevron_left</span>
+
+    </div><!--current-outside-->
+
+    <script src="javaScript.js"></script>
+  </body>
+</html>
