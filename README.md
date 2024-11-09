@@ -21,7 +21,8 @@ A página inicial permite que o usuário insira o nome de uma cidade e visualize
 - **Campo de busca**: O usuário digita o nome da cidade para realizar a consulta.
 - **Data e hora**: Exibição da data e hora atuais.
 
-![Página inicial](images/screenshot-1.png)
+![Página inicial](images/img-doc/screen-initial1.png)
+![Página inicial2](images/img-doc/screen-initial2.png)
 
 ### 2. **Página de resultados**
 Após a pesquisa, a aplicação exibe as informações sobre o clima da cidade buscada:
@@ -30,12 +31,15 @@ Após a pesquisa, a aplicação exibe as informações sobre o clima da cidade b
 - **Ícones de clima**: Ícones representando as condições climáticas, como sol, nuvens e chuva.
 - **Velocidade do vento** e **hora do nascer e pôr do sol**.
 
-![Página de resultados](images/screenshot-2.png)
+![Página de resultados1](images/img-doc/screen-result1.png)
+![Página de resultados2](images/img-doc/screen-result2.png)
 
 ### 3. **Modal de erro**
 Caso haja um erro na busca ou na chave de API, a aplicação exibe um modal com a mensagem de erro.
 
-![Modal de erro](images/screenshot-3.png)
+![Modal de erro1](images/img-doc/error_message1.png)
+![Modal de erro2](images/img-doc/error_message2.png)
+
 
 ## Tecnologias Utilizadas
 
