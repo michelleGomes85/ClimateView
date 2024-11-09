@@ -1,4 +1,4 @@
-const KEY_API = KEY_API_HEAR;
+const KEY_API = 'KEY_API';
 
 let control = 0;
 
@@ -34,7 +34,6 @@ window.onload = function() {
 const temperatures = { current: null, min: null, max: null };
 const city_name = document.getElementById('name_city');
 
-
 const btn_request = document.querySelector('#request');
 const btn_celsius = document.getElementById('btn-celsius');
 const btn_kelvin = document.getElementById('btn-kelvin');
@@ -45,6 +44,28 @@ const content = document.querySelector('.content');
 const content_initial = document.querySelector('.content-initial');
 const content_initial_active = document.querySelector('.content-initial-active');
 const content_active = document.querySelector('.content-active');
+
+const modal = document.getElementById('myModal');
+const close_modal = document.getElementsByClassName('close')[0];
+
+let error_api = false;
+
+function close_modal_func() {
+    modal.style.display = "none";
+
+    if (error_api)
+        location.reload();
+}
+
+close_modal.onclick = function() {
+    close_modal_func();
+}
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        close_modal_func();
+    }
+}
 
 btn_request.onclick = function () {
     fetchCityCoordinates(city_name.value);
@@ -124,18 +145,30 @@ city_name.addEventListener("keypress", function(event) {
     }
 });
 
-// Função que busca coordenadas da cidade
+const content_modal = document.querySelector('.content-modal');
+
 function fetchCityCoordinates(city) {
 
     var request = new XMLHttpRequest();
 
     request.onloadend = function() {
-        if (request.status === 200) { 
+        if (request.status === 200) {
             let response_obj = JSON.parse(request.responseText);
-            console.log(response_obj);
-            fetchWeatherInfo(response_obj[0]['lat'], response_obj[0]['lon']);
+            if (response_obj.length > 0) {
+                fetchWeatherInfo(response_obj[0]['lat'], response_obj[0]['lon']);
+            } else {
+                content_modal.textContent = "A cidade que você digitou não foi encontrada. Verifique se o nome está correto e tente novamente.";
+                modal.style.display = "block";
+                error_api = false;
+            }
+        } else if (request.status === 401) {
+            content_modal.textContent = "A chave de API fornecida é inválida ou está ausente. Por favor, gere sua própria chave de API na OpenWeather, substitua-a no código e recarregue a página.";
+            modal.style.display = "block";
+            error_api = true;
         } else {
-            console.error("Erro ao buscar coordenadas da cidade.");
+            content_modal.textContent = "Ocorreu um erro ao tentar buscar a cidade. Por favor, verifique sua conexão e tente novamente.";
+            modal.style.display = "block";
+            error_api = true;
         }
     };
 
@@ -143,27 +176,30 @@ function fetchCityCoordinates(city) {
     request.send(null);
 }
 
-// Função que busca informações climáticas usando as coordenadas
 function fetchWeatherInfo(latitude, longitude) {
 
     var request = new XMLHttpRequest();
 
     request.onloadend = function() {
-        if (request.status === 200) { 
+        if (request.status === 200) {
             let response_obj = JSON.parse(request.responseText);
             storeTemperatures(response_obj);
             showInformations(response_obj);
+        } else if (request.status === 401) {
+            content_modal.textContent = "Chave de API inválida. Recarregando a página... Verifique sua chave de API na OpenWeather e tente novamente.";
+            modal.style.display = "block";
+            error_api = true;
         } else {
-            console.error("Erro ao buscar informações do tempo.");
+            content_modal.textContent = "Ocorreu um problema ao buscar as informações climáticas. Por favor, tente novamente mais tarde.";
+            modal.style.display = "block";
+            error_api = true;
         }
     };
 
     request.open('GET', "https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&units=metric&appid=" + KEY_API);
-
     request.send(null);
 }
 
-// Armazena as temperaturas
 function storeTemperatures(response_obj) {
     temperatures.current = response_obj.main.temp;
     temperatures.min = response_obj.main.temp_min;
